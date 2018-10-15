@@ -2,4 +2,3 @@
 
 export(makeLibrary)
 export(summaryTable)
-importFrom(data.table,fread)

@@ -16,7 +16,7 @@ unlink(fl)
 xy <- readLines(fl.in)
 unlink(fl.in)
 
-test_that("correct layout", {
+test_that("correct translation to library fasta", {
   # test that there are indeed 6 lines read in
   expect_length(xy, 6)
   # test that elements 1, 3 and 5 start with >
