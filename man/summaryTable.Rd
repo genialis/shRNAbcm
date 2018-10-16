@@ -40,6 +40,11 @@ or read length below \code{low_readlengths_upper} will be excluded from the tall
 
 \item{count_alignscores, count_readlengths}{Integer. For count matrix, align counts for which align scores equal or greater to
 \code{count_alignscores} and read lengths equal or greater to \code{count_readlengths} will be used in the final tally.}
+
+\item{output_report}{Character. A name of file (incl. file extension) into which alignment report will be written to.}
+
+\item{output_count}{Character. A name of file (incl. file extension) into which count matrix (shRNA for rows, sample names
+for columns) will be written.}
 }
 \value{
 Two files, \code{global_alignment_report.txt} and \code{count_matrix.txt} are written as a side effect. Function

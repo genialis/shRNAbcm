@@ -1,12 +1,12 @@
 Package: shRNAbcm
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Functions needed to support the shRNA pipeline in rewolwe-bio
+Version: 1.0
+Author: Roman Luštrik and Nicholas Neill
+Maintainer: Roman Luštrik <roman@genialis.com>
+Description: A set of functions which cater to different parts of the pipeline, incl. building of
+  count matrices, performing differential expression analysis and collating of results.
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Suggests: 

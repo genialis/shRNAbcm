@@ -8,8 +8,8 @@
 #' @param lib Character. A link to library (fasta) file. See source code for how the data should be structured.
 #' @param trimreport Character. A link to global trim report from the pipeline. See source code for how the data
 #' should be structured.
-#' @param mapping.path Character. Path to where mapping files reside.
-#' @param mapping.rx Character. Valid regular expression for collating of mapping files (per sample).
+#' @param mapping_path Character. Path to where mapping files reside.
+#' @param mapping_rx Character. Valid regular expression for collating of mapping files (per sample).
 #' @param wt_alignscores Integer. Perfect align counts. Align counts that have align scores equal to \code{wt_alignscores} and
 #' read lengths equal or higher to \code{wt_readlengths_lower} will be summed.
 #' @param wt_readlengths_lower Integer. Perfect align counts. Align counts that have align scores equal to \code{wt_alignscores}
@@ -21,16 +21,21 @@
 #' or read length below \code{low_readlengths_upper} will be excluded from the tally.
 #' @param count_alignscores,count_readlengths Integer. For count matrix, align counts for which align scores equal or greater to
 #' \code{count_alignscores} and read lengths equal or greater to \code{count_readlengths} will be used in the final tally.
+#' @param output_report Character. A name of file (incl. file extension) into which alignment report will be written to.
+#' @param output_count Character. A name of file (incl. file extension) into which count matrix (shRNA for rows, sample names
+#' for columns) will be written.
 #'
 #' @return Two files, \code{global_alignment_report.txt} and \code{count_matrix.txt} are written as a side effect. Function
 #' returns a list of length 2 where one can access alignment report (\code{output$alignment_report}) or count matrix
 #' (\code{output$count_matrix}).
 #'
 #' @export
+#' @importFrom stats aggregate reshape
+#' @importFrom utils read.table write.table unstack
 #'
 #' @author Roman Luštrik (roman@@genialis.com) adapted original code by Nicholas Neill (nicholas.neill@@bcm.edu).
 
-summaryTable <- function(samkey, lib, trimreport, mapping.path = ".", mapping.rx = "^.*_mapped_species\\.txt$",
+summaryTable <- function(samkey, lib, trimreport, mapping_path = ".", mapping_rx = "^.*_mapped_species\\.txt$",
                          wt_alignscores = 0, wt_readlengths_lower = 26,
                          high_alignscores_upper = 0, high_alignscores_lower = -6, high_readlengths_lower = 26,
                          low_alignscores_upper = -6, low_readlengths_upper = 26,
@@ -89,7 +94,7 @@ summaryTable <- function(samkey, lib, trimreport, mapping.path = ".", mapping.rx
   # 6 TB4445-22 2680203   2646307   1779339
 
   # Import align counts and mapped shRNAs ####
-  file.samples <- list.files(path = mapping.path, pattern = mapping.rx, full.names = TRUE)
+  file.samples <- list.files(path = mapping_path, pattern = mapping_rx, full.names = TRUE)
 
   xy <- lapply(file.samples, FUN = function(i) {
     ri <- read.table(i, header = FALSE, sep = "", stringsAsFactors = FALSE)

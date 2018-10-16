@@ -2,3 +2,8 @@
 
 export(makeLibrary)
 export(summaryTable)
+importFrom(stats,aggregate)
+importFrom(stats,reshape)
+importFrom(utils,read.table)
+importFrom(utils,unstack)
+importFrom(utils,write.table)
