@@ -8,9 +8,8 @@
 #' @param output Character. Optional. If a character string of length one is supplied, it is
 #' stripped of file extension and appended \code{fasta}. If \code{NULL}, name of input is used,
 #' where \code{.fasta} extension is appended and written to working directory.
-#' @export
-#' @author Roman Luštrik (roman@@genialis.com) based on original code by Nicholas Neill (nicholas.neill@@bcm.edu).
 #'
+#' @export
 #' @return Returns link to file of the library, which has been written to working directory or
 #' path specified in \code{output} as a side effect.
 
@@ -21,7 +20,7 @@ makeLibrary <- function(input, output = NULL) {
   # AANAT_1522 AANAT GTATGGGACTCGGGGATCCCAGGTGTGCC
 
   # Define how a single read for fasta is written.
-  out <- sprintf("> %s-%s\n%s", xy[, 1], xy[, 2], xy[, 3])
+  out <- sprintf(">%s-%s\n%s", xy[, 1], xy[, 2], xy[, 3])
 
   # Prepare file name. Use default unless specified in output. Strip
   # of file extension and append .fasta when writing to file.

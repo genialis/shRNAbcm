@@ -1,16 +1,16 @@
 context("Testing summaryTable")
 
-library(shRNAbcm)
-
 file.sample <- "sample1_test_spec.txt"
 file.samplekey <- "samplekey.txt"
 file.lib <- "library.txt"
 file.trimreport <- "trimreport.txt"
+tar.txt <- "tar.txt"
+tcr.txt <- "tcr.txt"
 
 # On exit, the test will clean after itself.
 on.exit({
-  unlink(c(file.sample, file.samplekey, file.lib, file.trimreport))
-})
+  unlink(c(file.sample, file.samplekey, file.lib, file.trimreport, tar.txt, tcr.txt))
+}, add = TRUE)
 
 smp <- read.table(text = "      1 AANAT_2131-AANAT	GTATAAGGCAGCGATGGTGAGCTGCC	AS:i:-14
       1 AANAT_2131-AANAT	GTATGAGGCAGCGAAACTCACTGGCTGCC	AS:i:0
@@ -58,10 +58,10 @@ cat(file = file.trimreport, "sample1
 
 out <- summaryTable(samkey = file.samplekey,
                     lib = file.lib,
-                    mapping.rx = "^.*_test_spec\\.txt$",
+                    mapping_rx = "^.*_test_spec\\.txt$",
                     trimreport = file.trimreport,
-                    output_report = "tar.txt", # test alignment report
-                    output_count = "tcr.txt") # tst count matrix
+                    output_report = tar.txt, # test alignment report
+                    output_count = tcr.txt) # tst count matrix
 
 # compare against this
 out.gs <- structure(list(alignment_report = structure(list(sample = structure(1L, .Label = "sample1", class = "factor"),

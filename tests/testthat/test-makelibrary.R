@@ -1,7 +1,5 @@
 context("Testing makeLibrary")
 
-library(shRNAbcm)
-
 # write to these two files (.txt and .fasta)
 fl <- "temp_lib.txt"
 fl.in <- paste(tools::file_path_sans_ext(fl), ".fasta", sep = "")

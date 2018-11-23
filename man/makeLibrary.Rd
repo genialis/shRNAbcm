@@ -22,6 +22,3 @@ path specified in \code{output} as a side effect.
 Take a raw file and convert it to a valid fasta format. This file is necessary for performing
 alignment.
 }
-\author{
-Roman Luštrik (roman@genialis.com) based on original code by Nicholas Neill (nicholas.neill@bcm.edu).
-}

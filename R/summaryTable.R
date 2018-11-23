@@ -32,8 +32,6 @@
 #' @export
 #' @importFrom stats aggregate reshape
 #' @importFrom utils read.table write.table unstack
-#'
-#' @author Roman Luštrik (roman@@genialis.com) adapted original code by Nicholas Neill (nicholas.neill@@bcm.edu).
 
 summaryTable <- function(samkey, lib, trimreport, mapping_path = ".", mapping_rx = "^.*_mapped_species\\.txt$",
                          wt_alignscores = 0, wt_readlengths_lower = 26,

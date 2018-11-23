@@ -1,4 +1,4 @@
 library(testthat)
-library(shRNAbcm)
+library(shRNAde)
 
-test_check("shRNAbcm")
+test_check("shRNAde")

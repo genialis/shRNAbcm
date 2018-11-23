@@ -4,8 +4,8 @@
 \alias{summaryTable}
 \title{Summary and count table of shRNA by sample}
 \usage{
-summaryTable(samkey, lib, trimreport, mapping.path = ".",
-  mapping.rx = "^.*_mapped_species\\\\.txt$", wt_alignscores = 0,
+summaryTable(samkey, lib, trimreport, mapping_path = ".",
+  mapping_rx = "^.*_mapped_species\\\\.txt$", wt_alignscores = 0,
   wt_readlengths_lower = 26, high_alignscores_upper = 0,
   high_alignscores_lower = -6, high_readlengths_lower = 26,
   low_alignscores_upper = -6, low_readlengths_upper = 26,
@@ -21,9 +21,9 @@ summaryTable(samkey, lib, trimreport, mapping.path = ".",
 \item{trimreport}{Character. A link to global trim report from the pipeline. See source code for how the data
 should be structured.}
 
-\item{mapping.path}{Character. Path to where mapping files reside.}
+\item{mapping_path}{Character. Path to where mapping files reside.}
 
-\item{mapping.rx}{Character. Valid regular expression for collating of mapping files (per sample).}
+\item{mapping_rx}{Character. Valid regular expression for collating of mapping files (per sample).}
 
 \item{wt_alignscores}{Integer. Perfect align counts. Align counts that have align scores equal to \code{wt_alignscores} and
 read lengths equal or higher to \code{wt_readlengths_lower} will be summed.}
@@ -55,7 +55,4 @@ returns a list of length 2 where one can access alignment report (\code{output$a
 Produce a summary report. Report will include data for total number of reads, 5' trimmed reads, 3' trimmed reads,
 number and percent of mapped reads, number and percent of perfectly mapped reads, number and percent of good
 mapped reads, number and percent of poorly mapped reads and number of unmapped reads.
-}
-\author{
-Roman Luštrik (roman@genialis.com) adapted original code by Nicholas Neill (nicholas.neill@bcm.edu).
 }

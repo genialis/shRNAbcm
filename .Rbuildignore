@@ -1,2 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+sandboxy/
+.gitignore
+README.md
+.git/
+^data$
+.~lock.template_doDE_inputs.xlsx#

@@ -1,4 +1,4 @@
-Package: shRNAbcm
+Package: shRNAde
 Type: Package
 Title: Functions needed to support the shRNA pipeline in rewolwe-bio
 Version: 1.0
@@ -9,6 +9,9 @@ Description: A set of functions which cater to different parts of the pipeline, 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports: 
+  DESeq2 (>= 1.18.1),
+  readxl (>= 1.1.0),
 Suggests: 
-    testthat
+    testthat (>= 2.0.0)
 RoxygenNote: 6.1.0
