@@ -25,7 +25,7 @@ dir.create("./tempdata", showWarnings = FALSE)
 on.exit({unlink("./tempdata", recursive = TRUE)}, add = TRUE)
 
 for (i in 2:ncol(cts)) {
-  samplename <- sprintf("./tempdata/%s_trimmed_trimmed_mapped_species.txt", colnames(cts[i]))
+  samplename <- sprintf("./tempdata/%s_trimmed_trimmed_count_matrix.txt", colnames(cts[i]))
   on.exit({unlink(samplename)}, add = TRUE)  # clean after oneself, but only on exit
 
   write.table(cts[, c(1, i)], file = samplename, sep = "\t", row.names = FALSE, quote = FALSE)
@@ -38,7 +38,7 @@ class.res <- "class_results.txt"
 let.cnt <- "lethal_counts.txt"
 
 on.exit(
-  unlink(c(ben.cnt, deseq.res, class.res, let.cnt)),
+  {unlink(c(ben.cnt, deseq.res, class.res, let.cnt))},
   add = TRUE)
 
 import.contrast <- shRNAde:::importContrastList(x = inputfile)
@@ -57,10 +57,9 @@ test_that("perform differential expression", {
   # Number of columns should be equal to number of contrasts + number of overall contrasts.
   # +1 is accounting for gene name.
   expect_equal(ncol(beneficial.counts), sum(nrow(import.contrast), ncol(import.overall)) + 1)
-  expect_equal(sum(beneficial.counts[-1]), 2)
+  expect_equal(sum(beneficial.counts[-1]), 12)
 
   expect_equal(nrow(lethal.counts), N.genes)
   expect_equal(ncol(lethal.counts), sum(nrow(import.contrast), ncol(import.overall)) + 1)
-  expect_equal(sum(lethal.counts[-1]), 3)
+  expect_equal(sum(lethal.counts[-1]), 15)
 })
-

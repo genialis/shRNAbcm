@@ -87,7 +87,6 @@ doDE <- function(input, sample_list = NULL) {
   de.scrape <- scrapeDEresults(dds = de.result, shrna = shrna, gene = gene.names)
 
   # Write results to a file.
-  # TODO: if pool turns out to be an important issue, this information will have to be appended to a filename
   write.table(de.scrape, file = "deseq_results.txt", quote = FALSE, row.names = FALSE, sep = "\t")
 
   # Trim results of NAs.

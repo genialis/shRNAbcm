@@ -143,6 +143,7 @@ summaryTable <- function(samkey, lib, trimreport, mapping_path = ".", mapping_rx
   # 4 TB4445-20 3260564   3198344   1671554 1637325    0.502  938649     0.288 321022 0.0985 377654  0.116  1623239      0.498
   # 5 TB4445-21 2078391   2059003   1527371 1503861    0.724  855002     0.411 303352 0.1460 345507  0.166   574530      0.276
   # 6 TB4445-22 2680203   2646307   1779339 1749226    0.653  998534     0.373 353688 0.1320 397004  0.148   930977      0.347
+
   # Write result of global alignment report. ####
   write.table(trim.data, file = output_report, sep = '\t', row.names = FALSE)
 

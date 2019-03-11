@@ -164,24 +164,28 @@ scrapeDEresults <- function(dds, shrna, gene) {
 differentialExpression <- function(contrasts, sample_key, data, design = ~ 0 + group + replicate) {
 
   out <- apply(contrasts, MARGIN = 1, FUN = function(x, sample_key, data, design) {
-
     # Based on contrasts, subset data for samples who belong to the contrast (group).
     find.cols <- sprintf("(%s)|(%s)", x[1], x[2])
+    rownames(data) <- data$shRNA
     data <- data[, grepl(find.cols, colnames(data)), drop = FALSE]
 
     # Subset sample_key to match (samples) subsetted from data object.
     sample_key <- sample_key[sample_key$group %in% x, ]
 
     # Perform differential expression analysis
-    # TODO: capture errors gracefully
-    dds <- DESeqDataSetFromMatrix(countData = as.matrix(data), colData = sample_key[, c("replicate", "group")], design = design)
+    if (length(unique(sample_key$group)) != 2) {
+      stop("Number of contrasts group is not correct. Make sure contrasts have valid names.")
+    }
+
+    dds <- DESeqDataSetFromMatrix(countData = data, colData = sample_key[, c("replicate", "group")], design = design)
     dds <- DESeq(object = dds, fitType = "local", minReplicatesForReplace = Inf, betaPrior = FALSE)
-    results <- results(dds, contrast = c("group", x[c("group_1", "group_2")]))
+    results <- results(dds, contrast = c("group", x[c("group_1", "group_2")]), cooksCutoff = Inf,
+                       independentFiltering = FALSE, pAdjustMethod = "none")
+    results
   }, sample_key = sample_key, data = data, design = design)
 
   names(out) <- contrasts$contrast
   out
-
 }
 
 #' Import expression data based on sample key.
@@ -233,7 +237,9 @@ importExpressionsData <- function(sample_key, sample_list = NULL) {
 
   # Merge all count matrices based on shRNA. It is important to merge based on shRNA so that we can
   # relax the assumption that count matrices are all identically structured.
-  out <- Reduce(f = function(x, y) merge(x, y, by = "shRNA", sort = FALSE), x = cm)
+  out <- Reduce(f = function(x, y) merge(x, y, by = "shRNA", sort = FALSE, all = TRUE), x = cm)
+  out[is.na(out)] <- 0
+
   out
 }
 
